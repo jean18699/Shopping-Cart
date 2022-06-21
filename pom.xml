@@ -11,7 +11,7 @@
     <groupId>com.personal</groupId>
     <artifactId>shopping_cart</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>shopping_cart</name>
+    <name>shoppingCart</name>
     <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>11</java.version>
@@ -67,8 +67,12 @@
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
+        </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>

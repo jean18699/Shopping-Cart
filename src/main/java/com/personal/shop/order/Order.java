@@ -1,4 +1,4 @@
-package com.personal.shop.sales;
+package com.personal.shop.order;
 
 import com.personal.shop.product.Product;
 import com.personal.shop.user.User;
@@ -7,26 +7,27 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Set;
 
 @AllArgsConstructor @NoArgsConstructor
 @Setter @Getter
 @Entity
-public class ProductSales {
+@Table(name = "orders")
+public class Order {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private LocalDateTime saleDate;
+    private LocalDateTime purchaseDate;
 
     @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id")
     private Set<Product> products;
 
 }

@@ -12,7 +12,7 @@
             <div class="row mt-lg-5">&nbsp;</div>
             <div class="row mt-lg-5">&nbsp;</div>
             <div class="col-6">
-                <form th:action="@{/login}" th:object="${user}" method="post">
+                <form th:action="@{/login}" th:object="${loginForm}" method="post">
                     <div class="form-group">
                         <label for="username">Username</label>
                         <input th:field="*{username}" type="text" class="form-control" id="username" aria-describedby="emailHelp" name="username" placeholder="Enter Username">

@@ -6,7 +6,7 @@ import lombok.Setter;
 import javax.validation.constraints.NotBlank;
 
 @Getter @Setter
-public class NewUserForm {
+public class RegisterForm {
 
     // Spring validation
     @NotBlank(message = "This field can't be empty")

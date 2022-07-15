@@ -18,4 +18,6 @@ public class LoginForm {
     @NotBlank(message = "Password is mandatory")
     private String password;
 
+    private boolean remember;
+
 }

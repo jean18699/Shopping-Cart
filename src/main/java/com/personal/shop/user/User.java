@@ -8,7 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-@AllArgsConstructor @NoArgsConstructor
+@NoArgsConstructor
 @Getter @Setter
 @Entity
 @Table(name="users")
@@ -27,5 +27,11 @@ public class User {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="shopping_cart_id")
     private ShoppingCart shoppingCart;
+
+    public User(String username, String password){
+        this.username = username;
+        this.password = password;
+        this.shoppingCart = new ShoppingCart();
+    }
 
 }

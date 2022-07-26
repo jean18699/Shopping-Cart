@@ -43,17 +43,8 @@ public class WebController implements WebMvcConfigurer {
 
     @PostMapping("/login")
     //first parameters is the form to validate. 2nd parameter is the result of the validation
-    public String login(@Valid LoginForm form, BindingResult result, Model model){
-
-        if(result.hasErrors()){
-           return "login";
-        }else
-        {
-            if(model.getAttribute("title") != null){
-                model.addAttribute("title", form.getUsername());
-            }
-            return "redirect:/";
-        }
+    public String login(){
+        return "redirect:/";
     }
 
 }

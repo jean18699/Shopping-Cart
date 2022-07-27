@@ -9,6 +9,7 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter @Setter
 @Entity
 @Table(name="users")
@@ -28,9 +29,10 @@ public class User {
     @JoinColumn(name="shopping_cart_id")
     private ShoppingCart shoppingCart;
 
-    public User(String username, String password){
+    public User(String username, String password, String name){
         this.username = username;
         this.password = password;
+        this.name = name;
         this.shoppingCart = new ShoppingCart();
     }
 

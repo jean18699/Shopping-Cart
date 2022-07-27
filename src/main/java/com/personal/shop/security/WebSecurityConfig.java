@@ -36,7 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // Path authorization config
                 .csrf().disable()
                 .authorizeRequests()
-                    .antMatchers("/", "/login", "/cart").permitAll() // permitAll allows to access the urls indicated in antmatchers freely
+                    .antMatchers("/", "/login", "/cart","/register").permitAll() // permitAll allows to access the urls indicated in antmatchers freely
                     .antMatchers("/admin/**").hasRole("ADMIN")
                     .anyRequest().authenticated() // anyRequest is about the other urls, which must be authenticated
                     .and()// another config

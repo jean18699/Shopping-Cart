@@ -2,6 +2,7 @@ package com.personal.shop;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.personal.shop.user.LoginForm;
+import com.personal.shop.user.RegisterForm;
 import com.personal.shop.user.User;
 import com.personal.shop.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,5 +47,6 @@ public class WebController implements WebMvcConfigurer {
     public String login(){
         return "redirect:/";
     }
+
 
 }

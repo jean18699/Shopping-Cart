@@ -12,7 +12,7 @@ import java.util.Set;
 public class UserService {
 
     @Autowired
-    private UserRepository userRepository;
+    UserRepository userRepository;
 
     public User addUser(User user){
         userRepository.save(user);
@@ -23,6 +23,6 @@ public class UserService {
         return userRepository.findAll();
     }
 
-
+    public User getUserByUsername(String username){return userRepository.getReferenceById(username);}
 
 }

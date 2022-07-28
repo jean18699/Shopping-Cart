@@ -14,15 +14,21 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-    public User addUser(User user){
-        userRepository.save(user);
-        return user;
+    public User addUser(User newUser){
+       userRepository.save(newUser);
+       return newUser;
     }
 
     public List<User> getUsers(){
         return userRepository.findAll();
     }
+  /*  public User getUserByUsername(String username){
+        return userRepository.findUserByUsername(username).orElseThrow(()-> new UserNotFoundException("This user was not found"));
+    }
+*/
 
-    public User getUserByUsername(String username){return userRepository.getReferenceById(username);}
+    public boolean isExistingUser(User user){
+        return userRepository.existsById(user.getUsername());
+    }
 
 }

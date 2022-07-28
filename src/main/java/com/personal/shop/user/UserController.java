@@ -30,24 +30,27 @@ public class UserController {
 
     @PostMapping("/register")
     public String registerNewUser(@Valid RegisterForm registerForm, BindingResult result){
+        System.out.println(userService.getUsers().size());
 
-        System.out.println(userService.getUserByUsername(registerForm.getUsername()).getUsername());
-        if(result.hasErrors()){
-            return "redirect:/register";
-        }else
-        {
+        if(!result.hasErrors()){
             User newUser = new User(registerForm.getUsername(), registerForm.getPassword(), registerForm.getName());
 
-            if(userService.getUserByUsername(newUser.getUsername()) == null){
-                //userService.addUser(newUser);
-                return "redirect:/login";
+            if (userService.isExistingUser(newUser)) {
+                return "redirect:/register?exists=true";
             }else
             {
-                System.out.println("exists");
-                return "redirect:/register?exists";
+                userService.addUser(newUser);
+                return "redirect:/login";
             }
 
+            // System.out.println(userService.getUserByUsername(newUser.getUsername()).getUsername());
+            /* if(userService.addUser(newUser) != null){
+                return "redirect:/login";
+            }else {
+                return "redirect:/register?exists";
+            }*/
         }
+        return "register";
     }
 
 

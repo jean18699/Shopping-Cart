@@ -31,7 +31,7 @@
                         <label for="name">Name</label>
                         <input th:field="*{name}" type="text" class="form-control" id="name" placeholder="Enter Name">
                         <div th:if="${#fields.hasErrors('name')}" style="color:red" th:errors="*{name}"></div>
-                        <div th:if="${#request.getParameter('exists') == true}" style="color:red">User already exists</div>
+                        <div th:if="${userExists}" style="color:red">This username is already occupied</div>
 
                     </div>
 

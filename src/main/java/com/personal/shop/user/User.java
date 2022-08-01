@@ -29,11 +29,15 @@ public class User {
     @JoinColumn(name="shopping_cart_id")
     private ShoppingCart shoppingCart;
 
+    @Column(name="role")
+    private Role role;
+
     public User(String username, String password, String name){
         this.username = username;
         this.password = password;
         this.name = name;
         this.shoppingCart = new ShoppingCart();
+        this.role = Role.USER;
     }
 
 }

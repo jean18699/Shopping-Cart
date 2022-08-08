@@ -29,10 +29,7 @@ public class UserService {
     public List<User> getUsers(){
         return userRepository.findAll();
     }
-  /*  public User getUserByUsername(String username){
-        return userRepository.findUserByUsername(username).orElseThrow(()-> new UserNotFoundException("This user was not found"));
-    }
-*/
+
 
     public boolean isExistingUser(User user){
         return userRepository.existsById(user.getUsername());

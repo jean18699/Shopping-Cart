@@ -1,10 +1,13 @@
 package com.personal.shop.security;
 
 import com.personal.shop.user.LoginForm;
+import com.personal.shop.user.UserRepository;
 import com.personal.shop.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -17,24 +20,38 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
+import javax.sql.DataSource;
+
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    UserService userService;
+    private UserRepository userRepository;
+
+    @Autowired
+    private DataSource dataSource; // datasource dependency that takes the config values made in application.properties
+
+    @Value("select * from users inner join user_roles on users.username = user_roles.role_name")
+    private String userQuery;
+
+    //@Autowired
+   // private BCryptPasswordEncoder encoder;
 
     @Override
     protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
         // authentication manager
 
+        auth.jdbcAuthentication().passwordEncoder(new BCryptPasswordEncoder())
+                .dataSource(dataSource)
+                .usersByUsernameQuery("select u.username, u.password from users u where u.username =?")
+                .authoritiesByUsernameQuery("select users.username, user_roles.role_name from users inner join user_roles on users.username = user_roles.role_name");
+
+
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
-
-
         http
                 // Path authorization config
                 .csrf().disable()
